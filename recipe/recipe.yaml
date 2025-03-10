@@ -27,12 +27,6 @@ requirements:
     # Compiler names include 'c', 'cxx' and 'fortran', among others.
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}  # If you need any compiler, add the C standard library ("stdlib") too
-  host:
-    - python
-    - pip
-    - setuptools
-  run:
-    - python
 
 tests:
   - script:
