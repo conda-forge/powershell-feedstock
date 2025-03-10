@@ -12,7 +12,7 @@ source:
     target_directory: powershell
 
 build:
-  number: 0
+  number: 1
   skip:
     - not win
   script: |
