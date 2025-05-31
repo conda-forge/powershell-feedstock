@@ -1,6 +1,6 @@
 context:
   name: powershell
-  version: 7.5.0
+  version: 7.5.1
 
 package:
   name: ${{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-x64.zip
-    sha256: c270f392d63d4297d78730fbffc0fefa2aa7fb39c80307c3105d22cd7fc9040e
+    sha256: 4d3028da81170f8d1cd226614582f0a95d3dd5592127cf87a09e3a3568e51a08
     target_directory: powershell
 
 build:
