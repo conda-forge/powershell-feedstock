@@ -1,2 +1,4 @@
 #!/bin/bash
-exec "$CONDA_PREFIX/powershell/pwsh" "$@"
+
+# compare with pwsh.cmd
+exec "$(dirname "$0")/../powershell/pwsh" "$@"
