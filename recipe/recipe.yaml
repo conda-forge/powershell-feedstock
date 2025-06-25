@@ -28,6 +28,10 @@ source:
         sha256: d1f016ccce5a7106e36090bf13ae71b46115f256465aee07760b26e607f4d033
         target_directory: powershell
 
+requirements:
+  run:
+    - icu  # [linux]
+
 build:
   number: 2
   skip:
