@@ -48,9 +48,6 @@ build:
         cp $RECIPE_DIR/pwsh.sh $PREFIX/bin/pwsh
         chmod +x $PREFIX/bin/pwsh
 
-requirements:
-  build:
-    # PowerShell is distributed as pre-built binaries, no compilers needed
 
 tests:
   - script:
@@ -70,7 +67,7 @@ about:
   license_file:
     - powershell/LICENSE.txt
     - powershell/ThirdPartyNotices.txt
-    - powershell/assets/additionalAttributions.txt
+    # - powershell/assets/additionalAttributions.txt
 
   homepage: https://github.com/PowerShell/PowerShell
 
