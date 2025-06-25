@@ -51,7 +51,9 @@ build:
 
 requirements:
   run:
-    - icu  # [linux]
+    - if: linux
+      then:
+        - icu
 
 
 tests:
