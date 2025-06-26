@@ -8,4 +8,5 @@ github:
   tooling_branch_name: main
 conda_build:
   error_overlinking: true
+  test: native
 conda_forge_output_validation: true
