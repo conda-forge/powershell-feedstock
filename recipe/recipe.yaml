@@ -7,31 +7,69 @@ package:
   version: ${{ version }}
 
 source:
-  - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-x64.zip
-    sha256: 4d3028da81170f8d1cd226614582f0a95d3dd5592127cf87a09e3a3568e51a08
-    target_directory: powershell
+  - url: https://raw.githubusercontent.com/PowerShell/PowerShell/refs/heads/master/assets/additionalAttributions.txt
+    sha256: cd2d609357d2eebb43ada3870b9a63eb2c155c237ca89ad6cfaa4215023a5dab
+    target_directory: powershell/assets
+  - if: win
+    then:
+      - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-x64.zip
+        sha256: 4d3028da81170f8d1cd226614582f0a95d3dd5592127cf87a09e3a3568e51a08
+        target_directory: powershell
+  - if: linux and x86_64
+    then:
+      - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-linux-x64.tar.gz
+        sha256: bb9b5f7f8060007354d75da92fc6430c77ba074cf81bfa2156f1ba373ff477e5
+        target_directory: powershell
+  - if: linux and aarch64
+    then:
+      - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-linux-arm64.tar.gz
+        sha256: 87963ddfeff6ac7266bffbe021b08adaed264ad4a3ab936a820e6d7f45a9ee8a
+        target_directory: powershell
+  - if: osx and arm64
+    then:
+      - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-osx-arm64.tar.gz
+        sha256: d1f016ccce5a7106e36090bf13ae71b46115f256465aee07760b26e607f4d033
+        target_directory: powershell
+
 
 build:
-  number: 1
+  number: 2
   skip:
-    - not win
-  script: |
-    xcopy powershell "%PREFIX%\powershell" /E /I /F /B /Y
-    if %ERRORLEVEL% neq 0 exit 1
-    echo F | xcopy %RECIPE_DIR%\pwsh.cmd %PREFIX%\Scripts\pwsh.cmd /F /Y
-    if %ERRORLEVEL% neq 0 exit 1
+    - osx and x86_64  # Skip Intel macOS for now
+  script:
+    - if: win
+      then: |
+        xcopy powershell "%PREFIX%\powershell" /E /I /F /B /Y
+        if %ERRORLEVEL% neq 0 exit 1
+        echo F | xcopy %RECIPE_DIR%\pwsh.cmd %PREFIX%\Scripts\pwsh.cmd /F /Y
+        if %ERRORLEVEL% neq 0 exit 1
+    - if: unix
+      then: |
+        mkdir -p $PREFIX/powershell
+        cp -r powershell/* $PREFIX/powershell/
+        chmod +x $PREFIX/powershell/pwsh
+        mkdir -p $PREFIX/bin
+        cp $RECIPE_DIR/pwsh.sh $PREFIX/bin/pwsh
+        chmod +x $PREFIX/bin/pwsh
 
 requirements:
-  build:
-    # If your project compiles code (such as a C extension) then add the required compilers as separate entries here.
-    # Compiler names include 'c', 'cxx' and 'fortran', among others.
-    - ${{ compiler('c') }}
-    - ${{ stdlib('c') }}  # If you need any compiler, add the C standard library ("stdlib") too
+  run:
+    - if: linux
+      then:
+        - icu
+
 
 tests:
   - script:
-      - where powershell
-      - if not exist %PREFIX%\\powershell\\pwsh.exe exit 1
+      - if: win
+        then:
+          - where powershell
+          - if not exist %PREFIX%\\powershell\\pwsh.exe exit 1
+      - if: unix
+        then:
+          - which pwsh
+          - test -x $PREFIX/powershell/pwsh
+          - pwsh -Version
 
 about:
   summary: PowerShell for every system!
