@@ -7,6 +7,9 @@ package:
   version: ${{ version }}
 
 source:
+  - url: https://raw.githubusercontent.com/PowerShell/PowerShell/refs/heads/master/assets/additionalAttributions.txt
+    sha256: cd2d609357d2eebb43ada3870b9a63eb2c155c237ca89ad6cfaa4215023a5dab
+    target_directory: powershell/assets
   - if: win
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-x64.zip
@@ -74,7 +77,7 @@ about:
   license_file:
     - powershell/LICENSE.txt
     - powershell/ThirdPartyNotices.txt
-    # - powershell/assets/additionalAttributions.txt
+    - powershell/assets/additionalAttributions.txt
 
   homepage: https://github.com/PowerShell/PowerShell
 
