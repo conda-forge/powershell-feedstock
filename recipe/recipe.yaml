@@ -7,7 +7,7 @@ package:
   version: ${{ version }}
 
 source:
-  - url: https://raw.githubusercontent.com/PowerShell/PowerShell/refs/tags/v{{ version }}/assets/additionalAttributions.txt
+  - url: https://raw.githubusercontent.com/PowerShell/PowerShell/refs/tags/v${{ version }}/assets/additionalAttributions.txt
     sha256: cd2d609357d2eebb43ada3870b9a63eb2c155c237ca89ad6cfaa4215023a5dab
     target_directory: powershell/assets
   - if: win
