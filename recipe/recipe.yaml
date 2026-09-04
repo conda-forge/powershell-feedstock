@@ -1,6 +1,6 @@
 context:
   name: powershell
-  version: 7.6.4
+  version: 7.6.5
 
 package:
   name: ${{ name|lower }}
@@ -13,27 +13,27 @@ source:
   - if: win and x86_64
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-x64.zip
-        sha256: 80832551c52809301e6071c8bac977beb5a2f1ec953eb4db9f94deb953333793
+        sha256: 32eb8f6cdce08f86e987d625a2733e54ac3e289ae7e1621b14c0b5bcec2434ea
         target_directory: powershell
   - if: win and arm64
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/PowerShell-${{ version }}-win-arm64.zip
-        sha256: 774e541334ae2b2b9f14b96a0808e8905f19a103aefc790ec5d5be2a63ae9314
+        sha256: 20514a755d16428dc4355c85e0883c859531e71cc3e122670aa1fccdbf96ba7e
         target_directory: powershell
   - if: linux and x86_64
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-linux-x64.tar.gz
-        sha256: 4471b5a36bfe86ec7af8525d36bb1cacba0128e7aac22d05cc064bc00e604721
+        sha256: b34ab3b19acac1d3d4d0d3cfdb02acf62f457b0b6a962ff008132033f7566844
         target_directory: powershell
   - if: linux and aarch64
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-linux-arm64.tar.gz
-        sha256: d4ef2382fa452f2ccbdb48a01adbbce9ed64954872123970c16be6d086d1224b
+        sha256: ed4084f215d8bce2edd23aa7cb1f1e7b0818e41363a635a22065d2701b6141df
         target_directory: powershell
   - if: osx and arm64
     then:
       - url: https://github.com/PowerShell/PowerShell/releases/download/v${{ version }}/powershell-${{ version }}-osx-arm64.tar.gz
-        sha256: fff37135307d3a57038adb44eded6c3b4dcd2e254382f4913bc253499ef3469d
+        sha256: 8196d4b4e7c21b7f6df9d45687bb4e42dc8335f330b580d9eb15f3ef5042a8c3
         target_directory: powershell
 
 
